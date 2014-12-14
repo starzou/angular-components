@@ -1,0 +1,26 @@
+{
+  "name": "angular-components",
+  "version": "1.0.0",
+  "authors": [
+    "StarZou <zoutongyuan@163.com>"
+  ],
+  "description": "A Beautiful Angular Components Library",
+  "main": [
+    "dist/angular-components.js",
+    "dist/angular-components.tpl.js"
+  ],
+  "keywords": [
+    "angular",
+    "components",
+    "angular components"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/starzou/angular-components",
+  "ignore": [
+    "docs",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "^1.2.21"
+  }
+}
