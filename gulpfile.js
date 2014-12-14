@@ -40,7 +40,6 @@ gulp.task('mix-templates', function () {
  */
 gulp.task('mix-js', function () {
     gulp.src(srcPath + '/**/*.js')
-        .pipe(uglify())
         .pipe(concat(fileName + '.js'))
         .pipe(gulp.dest(distPath));
 });
@@ -50,6 +49,7 @@ gulp.task('mix-js', function () {
  */
 gulp.task('mix-min-js', function () {
     gulp.src(srcPath + '/**/*.js')
+        .pipe(uglify())
         .pipe(concat(fileName + '.min.js'))
         .pipe(gulp.dest(distPath));
 });
