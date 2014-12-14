@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" ng-app="examplesApp">
 <head>
     <meta charset="UTF-8">
-    <title>angular-components</title>
+    <title>angular-components examples</title>
 </head>
-<body>
+<body ng-controller="AppController">
+    <div>
+        <div>
+            <p ac-alert="hello" ng-bind="title"></p>
+        </div>
 
+    </div>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../dist/angular-components.js"></script>
+    <script src="../dist/angular-components.tpl.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

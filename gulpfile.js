@@ -13,9 +13,10 @@ var gulp = require('gulp'),
     templateCache = require('gulp-angular-templatecache');
 
 
-var srcPath = 'src/';
+var srcPath = 'src';
 var distPath = 'dist';
 var moduleName = 'ngComponents';
+var templateModuleName = 'ngComponents.templates';
 var fileName = 'angular-components';
 
 
@@ -31,7 +32,7 @@ gulp.task('clean', function (callback) {
  */
 gulp.task('mix-templates', function () {
     gulp.src([srcPath + '/**/*.html'])
-        .pipe(templateCache({root: moduleName}))
+        .pipe(templateCache({filename: fileName + '.tpl.js', module: templateModuleName, standalone: false}))
         .pipe(gulp.dest(distPath));
 });
 
