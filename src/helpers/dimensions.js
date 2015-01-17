@@ -15,37 +15,36 @@
             var fn = {};
 
             /**
-             * Test the element nodeName
+             * 确定元素 节点名
              * @param element
-             * @param name
+             * @param nodeName
              */
             var nodeName = fn.nodeName = function (element, name) {
                 return element.nodeName && element.nodeName.toLowerCase() === name.toLowerCase();
             };
 
             /**
-             * Returns the element computed style
+             * 根据属性名, 返回元素 计算的属性值
              * @param element
-             * @param prop
+             * @param property
              * @param extra
              */
-            fn.css = function (element, prop, extra) {
+            fn.css = function (element, property, extra) {
                 var value;
                 if (element.currentStyle) { //IE
-                    value = element.currentStyle[prop];
+                    value = element.currentStyle[property];
                 } else if (window.getComputedStyle) {
-                    value = window.getComputedStyle(element)[prop];
+                    value = window.getComputedStyle(element)[property];
                 } else {
-                    value = element.style[prop];
+                    value = element.style[property];
                 }
                 return extra === true ? parseFloat(value) || 0 : value;
             };
 
             /**
-             * Provides read-only equivalent of jQuery's offset function:
-             * @required-by bootstrap-tooltip, bootstrap-affix
-             * @url http://api.jquery.com/offset/
+             * 返回元素 偏移量 offset
              * @param element
+             * @returns {{width: (Number|number), height: (Number|number), top: number, left: number}}
              */
             fn.offset = function (element) {
                 var boxRect = element.getBoundingClientRect();
@@ -59,10 +58,9 @@
             };
 
             /**
-             * Provides read-only equivalent of jQuery's position function
-             * @required-by bootstrap-tooltip, bootstrap-affix
-             * @url http://api.jquery.com/offset/
+             * 返回元素 位置 position
              * @param element
+             * @returns {{width: number, height: number, top: number, left: number}}
              */
             fn.position = function (element) {
 
@@ -149,6 +147,80 @@
                     value -= fn.css(element, 'paddingLeft', true) + fn.css(element, 'paddingRight', true) + fn.css(element, 'borderLeftWidth', true) + fn.css(element, 'borderRightWidth', true);
                 }
                 return value;
+            };
+
+
+            /**
+             * 计算 元素 显示的 位置
+             * @param placement
+             * @param position
+             * @param actualWidth
+             * @param actualHeight
+             * @returns {*}
+             */
+            fn.getCalculatedOffset = function getCalculatedOffset(placement, position, actualWidth, actualHeight) {
+                var offset;
+                var split = placement.split('-');
+
+                switch (split[0]) {
+                    case 'right':
+                        offset = {
+                            top : position.top + position.height / 2 - actualHeight / 2,
+                            left: position.left + position.width
+                        };
+                        break;
+                    case 'bottom':
+                        offset = {
+                            top : position.top + position.height,
+                            left: position.left + position.width / 2 - actualWidth / 2
+                        };
+                        break;
+                    case 'left':
+                        offset = {
+                            top : position.top + position.height / 2 - actualHeight / 2,
+                            left: position.left - actualWidth
+                        };
+                        break;
+                    default:
+                        offset = {
+                            top : position.top - actualHeight,
+                            left: position.left + position.width / 2 - actualWidth / 2
+                        };
+                        break;
+                }
+
+                if (!split[1]) {
+                    return offset;
+                }
+
+                // Add support for corners @todo css
+                if (split[0] === 'top' || split[0] === 'bottom') {
+                    switch (split[1]) {
+                        case 'left':
+                            offset.left = position.left;
+                            break;
+                        case 'right':
+                            offset.left = position.left + position.width - actualWidth;
+                    }
+                } else if (split[0] === 'left' || split[0] === 'right') {
+                    switch (split[1]) {
+                        case 'top':
+                            offset.top = position.top - actualHeight;
+                            break;
+                        case 'bottom':
+                            offset.top = position.top + position.height;
+                    }
+                }
+
+                return offset;
+            };
+
+            fn.getPosition = function getPosition(element, options) {
+                if (options.container === 'body') {
+                    return dimensions.offset(element || options.target);
+                } else {
+                    return dimensions.position(element || options.target);
+                }
             };
 
             return fn;
