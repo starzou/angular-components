@@ -59,13 +59,35 @@
             link    : function ($scope, $element, $attr) {
                 var element = $element[0];
 
-                console.log(dimensions.nodeName(element, 'h1'));
-                console.log(dimensions.css(element, 'margin'));
+                //console.log(dimensions.nodeName(element, 'h1'));
+                //console.log(dimensions.css(element, 'margin'));
+                //
+                //console.log(dimensions.offset(element));
+                //console.log(dimensions.position(element));
+                //console.log(dimensions.height(element));
+                //console.log(dimensions.width(element));
 
-                console.log(dimensions.offset(element));
-                console.log(dimensions.position(element));
-                console.log(dimensions.height(element));
-                console.log(dimensions.width(element));
+                var elementPosition = dimensions.getPosition(element, true);
+                console.log(elementPosition);
+
+                var tipElement = angular.element('<div class="ignored ui popup inverted left top transition visible"><div class="content">Hello. This is an inverted popup</div></div>');
+
+                angular.element(document.body).after(tipElement);
+
+                //$element.after(tipElement);
+
+                var tipWidth = tipElement.prop('offsetWidth'),
+                    tipHeight = tipElement.prop('offsetHeight');
+
+
+                var tipPosition = dimensions.getCalculatedOffset('top', elementPosition, tipWidth, tipHeight);
+
+                tipPosition.top += 'px';
+                tipPosition.left += 'px';
+                tipElement.css(tipPosition);
+
+
+                console.log(tipWidth, tipHeight);
             }
         };
     }]);

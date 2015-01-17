@@ -215,11 +215,11 @@
                 return offset;
             };
 
-            fn.getPosition = function getPosition(element, options) {
-                if (options.container === 'body') {
-                    return dimensions.offset(element || options.target);
+            fn.getPosition = function getPosition(element, isBodyContainer) {
+                if (isBodyContainer) {
+                    return fn.offset(element);
                 } else {
-                    return dimensions.position(element || options.target);
+                    return fn.position(element);
                 }
             };
 
