@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-CN" ng-app="examplesApp">
+<html lang="zh-CN" ng-app="examplesApp" ng-controller="AppController">
 <head>
     <meta charset="UTF-8">
-    <title>Angular-Components Examples</title>
+    <title ng-bind="title"></title>
     <link rel="stylesheet" href="../bower_components/semantic-ui/dist/semantic.css"/>
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body ng-controller="AppController">
-    <div class="ui two column stackable padded grid">
-        <div class="blue column">
-            <h1 ng-bind="title"></h1>
-
-            <p ac-alert="hello" ng-bind="title"></p>
-        </div>
-        <div class="green column"></div>
-    </div>
+<body>
+    <div ui-view></div>
 
     <script src="../bower_components/angular/angular.js"></script>
+    <script src="js/lib/angular-ui-router.min.js"></script>
+
     <script src="../dist/angular-components.js"></script>
     <script src="../dist/angular-components.tpl.js"></script>
+
     <script src="app.js"></script>
 </body>
 </html>
