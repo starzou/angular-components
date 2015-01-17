@@ -46,6 +46,27 @@
      * IndexController
      */
     examplesApp.controller('IndexController', ['$scope', function ($scope) {
-        console.log($scope);
+        //console.log($scope);
+    }]);
+
+
+    /**
+     * 测试指令
+     */
+    examplesApp.directive('doTest', ['dimensions', function (dimensions) {
+        return {
+            restrict: 'EA',
+            link    : function ($scope, $element, $attr) {
+                var element = $element[0];
+
+                console.log(dimensions.nodeName(element, 'h1'));
+                console.log(dimensions.css(element, 'margin'));
+
+                console.log(dimensions.offset(element));
+                console.log(dimensions.position(element));
+                console.log(dimensions.height(element));
+                console.log(dimensions.width(element));
+            }
+        };
     }]);
 })(window, document);
