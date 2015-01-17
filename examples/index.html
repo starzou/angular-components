@@ -2,16 +2,20 @@
 <html lang="zh-CN" ng-app="examplesApp">
 <head>
     <meta charset="UTF-8">
-    <title>angular-components examples</title>
+    <title>Angular-Components Examples</title>
+    <link rel="stylesheet" href="../bower_components/semantic-ui/dist/semantic.css"/>
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-controller="AppController">
-    <div>
-        <h1 ng-bind="title"></h1>
-        <div>
+    <div class="ui two column stackable padded grid">
+        <div class="blue column">
+            <h1 ng-bind="title"></h1>
+
             <p ac-alert="hello" ng-bind="title"></p>
         </div>
-
+        <div class="green column"></div>
     </div>
+
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../dist/angular-components.js"></script>
     <script src="../dist/angular-components.tpl.js"></script>

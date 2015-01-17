@@ -9,8 +9,6 @@
     var examplesApp = angular.module('examplesApp', ['ngComponents']);
 
     examplesApp.controller('AppController', ['$scope', function ($scope) {
-        $scope.title = 'what is angular-components ?';
+        $scope.title = 'Angular-Components Examples';
     }]);
-
-
 })(window, document);
