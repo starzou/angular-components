@@ -7,6 +7,6 @@
 (function (window, document) {
     'use strict';
 
-    var helpersModule = angular.module('ngComponents.helpers', ['ngComponents.helpers.dimensions']);
+    var helpersModule = angular.module('ngComponents.helpers', ['ngComponents.helpers.dimensions', 'ngComponents.helpers.position']);
 
 })(window, document);

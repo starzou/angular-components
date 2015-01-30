@@ -215,8 +215,8 @@
                 return offset;
             };
 
-            fn.getPosition = function getPosition(element, isBodyContainer) {
-                if (isBodyContainer) {
+            fn.getPosition = function getPosition(element, appendToBody) {
+                if (appendToBody) {
                     return fn.offset(element);
                 } else {
                     return fn.position(element);
