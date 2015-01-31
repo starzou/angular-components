@@ -15,7 +15,7 @@
      * relation to other, existing elements (this is the case for tooltips, popovers,
      * typeahead suggestions etc.).
      */
-        .factory('position', ['$document', '$window', function ($document, $window) {
+        .factory('$position', ['$document', '$window', function ($document, $window) {
 
             function getStyle(el, cssprop) {
                 if (el.currentStyle) { //IE
