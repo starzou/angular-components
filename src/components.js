@@ -7,6 +7,6 @@
 (function (window, document, angular) {
     'use strict';
 
-    var ngComponents = angular.module('ngComponents', ['ngComponents.helpers', 'ngComponents.templates', 'ngComponents.alert']);
+    var ngComponents = angular.module('ngComponents', ['ngComponents.helpers', 'ngComponents.templates', 'ngComponents.alert', 'ngComponents.table']);
 
 })(window, document, angular);
