@@ -22,12 +22,26 @@
             sizeList   : [10, 20, 50, 100, 150]
         };
 
-        this.$get = ['$rootScope', '$$rAF', '$templateRequest', function ($rootScope, $$rAF, $templateRequest) {
+        this.$get = ['$rootScope', '$compile', '$$rAF', '$templateRequest', function ($rootScope, $compile, $$rAF, $templateRequest) {
 
             function TableFactory($element, config) {
                 var $table = {}; // table 组件
                 var options = $table.$options = angular.extend({}, defaults, config); // table 配置
+
+                $table.$promise = $templateRequest(options.template);
+
                 var scope = $table.$scope = options.scope && options.scope.$new() || $rootScope.$new(); // table组件的 scope
+
+                var tableLinker, tableElement, tableTemplate, tableScope;
+                $table.$promise.then(function (template) {
+                    tableTemplate = template;
+                    tableLinker = $compile(template);
+                    $table.init();
+                });
+
+                $table.init = function () {
+                    console.log('$table.init...', Date.now());
+                };
 
                 return $table;
             }
