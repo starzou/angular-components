@@ -15,6 +15,8 @@
             prefixClass: 'table',
             prefixEvent: 'table',
             template   : 'table/table.tpl.html',
+            show       : true,
+            enabled    : true,
             pager      : {
                 currentPage: 1,
                 pageSize   : 20
@@ -32,7 +34,7 @@
 
                 var scope = $table.$scope = options.scope && options.scope.$new() || $rootScope.$new(); // table组件的 scope
 
-                var tableLinker, tableElement, tableTemplate, tableScope;
+                var tableLinker, tableElement, tableTemplate, tableContainer, tableScope;
                 $table.$promise.then(function (template) {
                     tableTemplate = template;
                     tableLinker = $compile(template);
@@ -41,10 +43,40 @@
 
                 $table.init = function () {
                     console.log('$table.init...', Date.now());
+
+                    if (options.container === 'self') {
+                        tableContainer = $element;
+                    } else if (angular.isElement(options.container)) {
+                        tableContainer = options.container;
+                    } else if (options.container) {
+                        tableContainer = document.querySelectorAll(options.container);
+                    }
+
+                    if (options.show) {
+                        $table.show();
+                    }
                 };
 
                 $table.show = function () {
+                    if (!options.enabled) {
+                        return
+                    }
+                    scope.$emit(options.prefixEvent + '.show.before', $table);
 
+                    var parent, after;
+                    if (options.container) {
+                        parent = tableContainer;
+                        if (tableContainer[0].lastChild) {
+                            after = angular.element(tableContainer[0].lastChild);
+                        } else {
+                            after = null;
+                        }
+                    } else {
+                        parent = null;
+                        after = $element;
+                    }
+
+                    console.log(parent, after);
                 };
 
                 $table.hide = function () {
