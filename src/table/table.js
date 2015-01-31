@@ -43,6 +43,18 @@
                     console.log('$table.init...', Date.now());
                 };
 
+                $table.show = function () {
+
+                };
+
+                $table.hide = function () {
+
+                };
+
+                $table.destroy = function () {
+                    scope.$destroy();
+                };
+
                 return $table;
             }
 
