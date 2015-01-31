@@ -76,7 +76,17 @@
                         after = $element;
                     }
 
-                    console.log(parent, after);
+                    tableScope = $table.$scope.$new();
+                    tableElement = $table.$element = tableLinker(tableScope);
+
+                    if (parent) {
+                        parent.append(tableElement);
+                    }
+                    if (after) {
+                        after.after(tableElement);
+                    }
+
+                    console.log(tableElement, parent, after);
                 };
 
                 $table.hide = function () {
