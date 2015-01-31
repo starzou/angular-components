@@ -9,7 +9,7 @@
 
     angular.module('ngComponents.helpers.dimensions', [])
 
-        .factory('dimensions', ['$document', '$window', function ($document, $window) {
+        .factory('$dimensions', ['$document', '$window', function ($document, $window) {
 
             var jqLite = angular.element;
             var fn = {};
